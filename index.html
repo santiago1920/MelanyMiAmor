@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-    <title>Do You Wanna Go Out With Me?</title>
 </head>
 <body>
     <div class="container">
-        <h1 class="header_text">Do you wanna go out with me?</h1>
-        <div class="gif_container">
-            <img src="https://media.tenor.com/efbi1EpFlVUAAAAi/bugcat-capoo.gif" alt="Cute Capoo GIF">
-        </div>
+        <h1>Saldrias conmigo?</h1>
         <div class="buttons">
-            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-            <button class="btn" id="noButton" onmouseover="moveButton()">No</button>
+            <button class="yes-button" onclick="handleYesClick()">Si</button>
+            <button class="no-button" onclick="handleNoClick()">No</button>
+        </div>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
