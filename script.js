@@ -1,20 +1,59 @@
-// Funci髇 para redirigir a la p醙ina de aceptaci髇
+// Funci贸n para redirigir a la p谩gina de aceptaci贸n (para el bot贸n Yes)
 function nextPage() {
-    window.location.href = "yes.html";  // Aseg鷕ate de que el nombre del archivo es correcto
+    window.location.href = "yes.html";
 }
 
-// Funci髇 para mover el bot髇 "No" a una posici髇 aleatoria
+// Funci贸n para mover el bot贸n "No" en PC al pasar el mouse
 function moveButton() {
     const noButton = document.getElementById("noButton");
-    // Aseguramos que el bot髇 tenga posicionamiento absoluto para poder moverlo
+    // Se asegura que el bot贸n tenga posici贸n absoluta para poder moverlo
     noButton.style.position = "absolute";
     noButton.style.top = Math.random() * (window.innerHeight - noButton.offsetHeight) + "px";
     noButton.style.left = Math.random() * (window.innerWidth - noButton.offsetWidth) + "px";
 
-    // Opcional: Agregar una animaci髇 al bot髇
+    // Agrega una animaci贸n de 'wiggle' (definida en CSS)
     noButton.classList.add("wiggle");
-    // Remover la clase despu閟 de que la animaci髇 finalice para permitir futuras animaciones
     setTimeout(() => {
         noButton.classList.remove("wiggle");
     }, 500);
 }
+
+// Variable para contar cu谩ntas veces se ha presionado el bot贸n "No" en m贸vil
+let noPressCount = 0;
+
+// Funci贸n para detectar si estamos en un dispositivo m贸vil
+function isMobile() {
+    return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+}
+
+// Funci贸n para agrandar el bot贸n "Yes" en m贸vil al presionar el bot贸n "No"
+function increaseYesButton() {
+    const yesButton = document.getElementById("yesButton");
+    noPressCount++;
+
+    // Obtener el valor actual de escala, si no existe se toma 1
+    let currentScale = parseFloat(yesButton.getAttribute("data-scale")) || 1;
+    // Incrementar la escala en 0.5 por cada toque
+    let newScale = currentScale + 0.5;
+    yesButton.style.transform = "scale(" + newScale + ")";
+    yesButton.setAttribute("data-scale", newScale);
+
+    // Si se ha presionado 3 veces, cambiar el encabezado y ocultar el bot贸n "No"
+    if (noPressCount >= 3) {
+        const header = document.querySelector(".header_text");
+        header.textContent = "SEGURA?!";
+        const noButton = document.getElementById("noButton");
+        noButton.style.display = "none";
+    }
+}
+
+// Al cargarse el DOM, ajustamos el comportamiento seg煤n el dispositivo
+document.addEventListener("DOMContentLoaded", function () {
+    const noButton = document.getElementById("noButton");
+    if (isMobile()) {
+        // En dispositivos m贸viles, eliminamos el comportamiento de "onmouseover"
+        noButton.removeAttribute("onmouseover");
+        // Y a帽adimos el evento 'click' para incrementar el bot贸n "Yes"
+        noButton.addEventListener("click", increaseYesButton);
+    }
+});
